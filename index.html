@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15 Anos Clara Elisa - Confirmação de Presença</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(100, 181, 246, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #90caf9 0%, #64b5f6 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 3px solid #64b5f6;
+        }
+
+        .monogram {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            color: #fff;
+            font-weight: 300;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 50px;
+        }
+
+        .info-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: #64b5f6;
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: start;
+            gap: 10px;
+        }
+
+        .info-item strong {
+            color: #333;
+            font-weight: 600;
+            min-width: 80px;
+        }
+
+        .info-item span {
+            color: #666;
+        }
+
+        .gift-examples {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .gift-examples h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            color: #64b5f6;
+            margin-bottom: 10px;
+        }
+
+        .gift-examples ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .gift-examples li {
+            color: #666;
+            padding: 5px 0;
+            font-size: 14px;
+        }
+
+        .gift-examples li:before {
+            content: "• ";
+            color: #64b5f6;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .form-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: #64b5f6;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #64b5f6;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 5px;
+            color: #999;
+            font-size: 12px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #64b5f6 0%, #90caf9 100%);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(100, 181, 246, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 12px;
+            background: #4caf50;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #45a049;
+        }
+
+        .download-btn.excel {
+            background: #217346;
+        }
+
+        .download-btn.excel:hover {
+            background: #1a5c37;
+        }
+
+        .footer {
+            background: #e3f2fd;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .error-message {
+            display: none;
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .warning-message {
+            display: none;
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .guest-counter {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .guest-counter strong {
+            color: #64b5f6;
+            font-size: 18px;
+        }
+
+        .admin-section {
+            display: none;
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .admin-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            color: #64b5f6;
+            margin-bottom: 15px;
+        }
+
+        .confirmations-list {
+            max-height: 300px;
+            overflow-y: auto;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .confirmation-item {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 13px;
+        }
+
+        .confirmation-item:last-child {
+            border-bottom: none;
+        }
+
+        .confirmation-item strong {
+            color: #64b5f6;
+        }
+
+        .admin-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #64b5f6;
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(100, 181, 246, 0.4);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .admin-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 2000;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                padding: 30px 20px;
+            }
+
+            .monogram {
+                font-size: 36px;
+            }
+
+            .title {
+                font-size: 32px;
+            }
+
+            .subtitle {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="monogram">✦</div>
+            <h1 class="title">15 Anos Clara Elisa</h1>
+            <p class="subtitle">Confirmação de Presença</p>
+        </div>
+
+        <div class="content">
+            <div class="info-section">
+                <h2>Detalhes do Evento</h2>
+                <div class="info-item">
+                    <strong>Data:</strong>
+                    <span>20 de Dezembro de 2025</span>
+                </div>
+                <div class="info-item">
+                    <strong>Horário:</strong>
+                    <span>20:00h</span>
+                </div>
+                <div class="info-item">
+                    <strong>Local:</strong>
+                    <span>Rua Marechal Falconiere, 436<br>Jardim Europa - Belo Horizonte</span>
+                </div>
+
+                <div class="gift-examples">
+                    <h3>Sugestões de Presente</h3>
+                    <ul>
+                        <li>Blusa P</li>
+                        <li>Calça P ou 36</li>
+                        <li>Calçado 36</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Confirme sua Presença</h2>
+
+                <div class="guest-counter">
+                    Convidados confirmados: <strong id="guestCount">0</strong> / 108
+                </div>
+
+                <div class="success-message" id="successMessage">
+                    Confirmação enviada com sucesso! Obrigado!
+                </div>
+
+                <div class="error-message" id="errorMessage">
+                    Desculpe, não há vagas suficientes disponíveis!
+                </div>
+
+                <div class="warning-message" id="warningMessage">
+                    Este nome já foi confirmado!
+                </div>
+
+                <form id="confirmationForm">
+                    <div class="form-group">
+                        <label for="name">Nome Completo *</label>
+                        <input type="text" id="name" name="name" required placeholder="Digite seu nome completo">
+                        <small>Por favor, insira seu nome e sobrenome</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Mensagem (Opcional)</label>
+                        <textarea id="message" name="message" placeholder="Deixe uma mensagem especial"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">Confirmar Presença</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Para mais informações, entre em contato conosco</p>
+        </div>
+    </div>
+
+    <button class="admin-toggle" onclick="toggleAdmin()">⚙️</button>
+
+    <div class="overlay" id="overlay" onclick="toggleAdmin()"></div>
+
+    <div class="admin-panel" id="adminPanel">
+        <button class="close-btn" onclick="toggleAdmin()">×</button>
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #64b5f6; margin-bottom: 20px;">Painel Administrativo</h3>
+
+        <div class="confirmations-list" id="confirmationsList">
+            <p style="color: #999; text-align: center;">Nenhuma confirmação ainda</p>
+        </div>
+
+        <button class="download-btn excel" onclick="downloadExcel()">📊 Baixar Lista (Excel)</button>
+        <button class="download-btn" onclick="downloadCSV()">📄 Baixar Dados (CSV)</button>
+        <button class="download-btn" onclick="downloadData()">📥 Baixar Dados (JSON)</button>
+    </div>
+
+    <script>
+        const MAX_GUESTS = 108;
+        let totalConfirmedGuests = 0;
+        let confirmations = [];
+
+        function toggleAdmin() {
+            const panel = document.getElementById('adminPanel');
+            const overlay = document.getElementById('overlay');
+            panel.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // Carregar dados do localStorage
+        function loadData() {
+            const savedConfirmations = localStorage.getItem('confirmations');
+            const savedTotal = localStorage.getItem('totalGuests');
+
+            if (savedConfirmations) {
+                confirmations = JSON.parse(savedConfirmations);
+                displayConfirmations();
+            }
+
+            if (savedTotal) {
+                totalConfirmedGuests = parseInt(savedTotal);
+                updateGuestCounter();
+            }
+        }
+
+        // Salvar dados no localStorage
+        function saveData() {
+            localStorage.setItem('confirmations', JSON.stringify(confirmations));
+            localStorage.setItem('totalGuests', totalConfirmedGuests);
+        }
+
+        // Normalizar nome para comparação
+        function normalizeName(name) {
+            return name.trim().toLowerCase().replace(/\s+/g, ' ');
+        }
+
+        // Verificar se nome já existe
+        function nameExists(name) {
+            const normalizedName = normalizeName(name);
+            return confirmations.some(conf => normalizeName(conf.name) === normalizedName);
+        }
+
+        // Validar nome completo (pelo menos 2 palavras)
+        function isFullName(name) {
+            const words = name.trim().split(/\s+/);
+            return words.length >= 2 && words.every(word => word.length >= 2);
+        }
+
+        // Exibir lista de confirmações
+        function displayConfirmations() {
+            const list = document.getElementById('confirmationsList');
+
+            if (confirmations.length === 0) {
+                list.innerHTML = '<p style="color: #999; text-align: center;">Nenhuma confirmação ainda</p>';
+                return;
+            }
+
+            list.innerHTML = confirmations.map((conf, index) => `
+                <div class="confirmation-item">
+                    <strong>${index + 1}. ${conf.name}</strong><br>
+                    ${conf.message ? 'Mensagem: ' + conf.message + '<br>' : ''}
+                    <small style="color: #999;">Data: ${conf.timestamp}</small>
+                </div>
+            `).join('');
+        }
+
+        function updateGuestCounter() {
+            document.getElementById('guestCount').textContent = totalConfirmedGuests;
+
+            if (totalConfirmedGuests >= MAX_GUESTS) {
+                document.getElementById('submitBtn').disabled = true;
+                document.getElementById('submitBtn').textContent = 'Vagas Esgotadas';
+            }
+        }
+
+        // Baixar dados em Excel
+        function downloadExcel() {
+            // Preparar dados para o Excel
+            const excelData = confirmations.map((conf, index) => ({
+                'Nº': index + 1,
+                'Nome Completo': conf.name,
+                'Mensagem': conf.message || '',
+                'Data/Hora': conf.timestamp
+            }));
+
+            // Criar workbook e worksheet
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.json_to_sheet(excelData);
+
+            // Ajustar largura das colunas
+            ws['!cols'] = [
+                { wch: 5 },   // Nº
+                { wch: 30 },  // Nome Completo
+                { wch: 40 },  // Mensagem
+                { wch: 20 }   // Data/Hora
+            ];
+
+            // Adicionar worksheet ao workbook
+            XLSX.utils.book_append_sheet(wb, ws, 'Confirmações');
+
+            // Gerar e baixar arquivo
+            XLSX.writeFile(wb, 'confirmacoes_15anos_clara_elisa.xlsx');
+        }
+
+        // Baixar dados em JSON
+        function downloadData() {
+            const dataStr = JSON.stringify(confirmations, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'confirmacoes_15anos_clara_elisa.json';
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Baixar dados em CSV
+        function downloadCSV() {
+            let csv = 'Nº,Nome Completo,Mensagem,Data/Hora\n';
+
+            confirmations.forEach((conf, index) => {
+                csv += `${index + 1},"${conf.name}","${conf.message || ''}","${conf.timestamp}"\n`;
+            });
+
+            const csvBlob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(csvBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'confirmacoes_15anos_clara_elisa.csv';
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        document.getElementById('confirmationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const nameInput = document.getElementById('name').value;
+
+            // Validar nome completo
+            if (!isFullName(nameInput)) {
+                document.getElementById('warningMessage').textContent = 'Por favor, insira seu nome completo (nome e sobrenome)';
+                document.getElementById('warningMessage').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('warningMessage').style.display = 'none';
+                }, 5000);
+                return;
+            }
+
+            // Verificar se nome já existe
+            if (nameExists(nameInput)) {
+                document.getElementById('warningMessage').textContent = 'Este nome já foi confirmado!';
+                document.getElementById('warningMessage').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('warningMessage').style.display = 'none';
+                }, 5000);
+                return;
+            }
+
+            // Verificar limite de vagas
+            if (totalConfirmedGuests >= MAX_GUESTS) {
+                document.getElementById('errorMessage').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('errorMessage').style.display = 'none';
+                }, 5000);
+                return;
+            }
+
+            const formData = {
+                name: nameInput.trim(),
+                message: document.getElementById('message').value,
+                timestamp: new Date().toLocaleString('pt-BR')
+            };
+
+            confirmations.push(formData);
+            totalConfirmedGuests += 1;
+
+            saveData();
+            displayConfirmations();
+            updateGuestCounter();
+
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('confirmationForm').reset();
+
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        });
+
+        // Carregar dados ao iniciar
+        loadData();
+    </script>
+</body>
+</html>
